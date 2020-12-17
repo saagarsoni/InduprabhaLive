@@ -809,3 +809,68 @@
         } // venobox
     }); // extend
 })(jQuery);
+
+
+/* -------- gallery navigation -------- */
+                function navigateGall(destination) {
+
+                    if (destination.length < 1) {
+                      return false;
+                    }
+                    if (keyNavigationDisabled) {
+                      return false;
+                    }
+                    keyNavigationDisabled = true;
+
+                    overlayColor = destination.data('overlay') || destination.data('overlaycolor');
+
+                    framewidth = destination.data('framewidth');
+                    frameheight = destination.data('frameheight');
+                    border = destination.data('border');
+                    bgcolor = destination.data('bgcolor');
+                    dest = destination.data('href') || destination.attr('href');
+
+                    autoplay = destination.data('autoplay');
+
+                    title = (destination.data('titleattr') && destination.attr(destination.data('titleattr'))) || '';
+
+                    // swipe out item
+                    if (destination === theprev) {
+                      content.addClass('vbox-animated').addClass('swipe-right');
+                    }
+                    if (destination === thenext) {
+                      content.addClass('vbox-animated').addClass('swipe-left');
+                    }
+
+                    $preloader.show();
+
+                    content.animate({
+                      opacity : 0,
+                    }, 500, function(){
+
+                        overlay.css('background',overlayColor);
+
+                        content
+                        .removeClass('vbox-animated')
+                        .removeClass('swipe-left')
+                        .removeClass('swipe-right')
+                        .css({'margin-left': 0,'margin-right': 0});
+
+                        if (destination.data('vbtype') == 'iframe') {
+                            loadIframe();
+                        } else if (destination.data('vbtype') == 'inline') {
+                            loadInline();
+                        } else if (destination.data('vbtype') == 'ajax') {
+                            loadAjax();
+                        } else if (destination.data('vbtype') == 'video') {
+                            loadVid(autoplay);
+                        } else {
+                            content.html('<img src="'+dest+'">');
+                            preloadFirst();
+                        }
+                        obj = destination;
+                        checknav();
+                        keyNavigationDisabled = false;
+                        option.cb_after_nav(obj, gallIndex, thenext, theprev);
+                    });
+                }
