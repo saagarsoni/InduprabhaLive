@@ -1661,7 +1661,7 @@ section {
 }
 
 #gallery .owl-dot.active {
-  background-color: #f82249;
+  background-color:#2680d9;
 }
 
 #gallery .gallery-carousel .owl-stage-outer {
@@ -1669,7 +1669,7 @@ section {
 }
 
 #gallery .gallery-carousel .center {
-  border: 6px solid #f82249;
+  border: 6px solid #2680d9;
   margin: -10px;
   box-sizing: content-box;
   padding: 4px;
