@@ -491,66 +491,57 @@
     </section><!-- End Contact Us Section -->
 
 <!-- ======= Testimonials Section ======= -->
+
     <section id="testimonials" class="section-bg">
+             <?php
+$servername='localhost';
+$username='root';
+$password='';
+$dbname = "induprabha";
+$conn=mysqli_connect($servername,$username,$password,"$dbname");
+if(!$conn){
+   die('Could not Connect My Sql:' .mysql_error());
+}
+$result = mysqli_query($conn,"SELECT * FROM feedback");
+?>
+<?php
+if (mysqli_num_rows($result) > 0) {
+?>
+
       <div class="container" data-aso="zoom-in">
 
         <div class="section-title"><h2>Reviews</h2></div>
 
-                <div class="row justify-content-center">
+         <div class="row justify-content-center">
           <div class="col-lg-8">
-
-            <div class="owl-carousel testimonials-carousel">
-
-              <div class="testimonial-item">
-                <!-- <img src="assets/img/testimonial-1.jpg" class="testimonial-img" alt=""> -->
-                <h3> M. Stoltz: Elmendorf AFB</h3>
-                <!-- <h4>Ceo &amp; Founder</h4> -->
-                <p>
-                 "This is the 2nd time we have stayed here. We recommended our in-laws stay here and they loved it!"
-                </p>
-              </div>
-
-              <div class="testimonial-item">
-                <!-- <img src="assets/img/testimonial-2.jpg" class="testimonial-img" alt=""> -->
-                <h3>B. Gren: Anchorage</h3>
-                <!-- <h4>Designer</h4> -->
-                <p>
-                  "5 Star Cleanliness. Has everything that could be needed—excellent. Very comfortable. Everything was more than we expected. Newspaper and continental breakfast was a nice touch.
-                  </p>
-              </div>
-
-              <div class="testimonial-item">
-                <!-- <img src="assets/img/testimonial-3.jpg" class="testimonial-img" alt=""> -->
-                <h3>orene Forttrell: Chazy</h3>
-                <!-- <h4>Store Owner</h4> -->
-                <p>
-                  Location was perfect! We walked everywhere, shared suite with my sister and we couldn't have been happier with the room and fully equipped kitchen.
-                </p>
-              </div>
-
-              <div class="testimonial-item">
-                <!-- <img src="assets/img/testimonial-4.jpg" class="testimonial-img" alt=""> -->
-                <h3>S. Bond: Sumner</h3>
-                <!-- <h4>Freelancer</h4> -->
-                <p>
-                  My stay exceeded my expectations...room, comfy-like home. All of the extras are here. The business center is a major convenience—very nice!                </p>
-              </div>
-
-              <div class="testimonial-item">
-                <!-- <img src="assets/img/testimonial-5.jpg" class="testimonial-img" alt=""> -->
-                <h3>John Larson</h3>
-                <!-- <h4>Entrepreneur</h4> -->
-                <p>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                </p>
-              </div>
-
+            
+           <div class="owl-carousel testimonials-carousel">
+<?php
+              $i=0;
+              while($row = mysqli_fetch_array($result)) {
+            ?>
+             <div class="testimonial-item">
+     <h3> <?php echo $row["name"]; ?></h3>
+     <p><?php echo $row["message"]; ?></p>
+  </div>
+                 <?php
+  $i++;
+}
+?>
+ <?php
+}
+else{
+    echo "No result found";
+}
+?>
             </div>
 
           </div>
+
         </div>
 
       </div>
+
     </section><!-- End Testimonials Section -->
 
   </main><!-- End #main -->
